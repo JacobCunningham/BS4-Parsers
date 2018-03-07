@@ -8,21 +8,29 @@ import time
 Work in progress.
 
 This script takes s gmail address, a password, and a desired shoe name as as a string. The more precise the 
-show name entered the better, it will parse the Nike men's shoes page every minute until it finds a match
+show name entered the better, it will parse the Nike men's or women's shoes page every minute until it finds a match
 and then it will email you that the shoe was found.
 '''
 
 email_serv = smtplib.SMTP('smtp.gmail.com', 587)
 email = input('Enter your email: ')
 password = getpass.getpass()
+gen = input("Men's or Women's shoes? M/W").upper()
 rawg = input("Enter desired shoe: ")
 goal = rawg.title()
 
 found = False
 
+if gen == 'M':
+    sel = 'mens'
+elif gen == 'W':
+    sel = 'womens'
+else:
+    raise ValueError
+
 while not found:
 
-    shoe_client = urlopen('https://store.nike.com/us/en_us/pw/mens-shoes/7puZoi3')
+    shoe_client = urlopen(f'https://store.nike.com/us/en_us/pw/{sel}-shoes/7puZoi3')
     shoe_html = shoe_client.read()
     shoe_soup = BeautifulSoup(shoe_html, 'html.parser')
     shoe_client.close()
