@@ -1,2 +1,2 @@
-# Steam-HTML-Parser
-An improvement of one of the first scripts I ever wrote
+# BS4 Parsers
+A growing collection of various scripts and bots that use Beautiful Soup 4.
